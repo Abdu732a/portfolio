@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    @apply bg-[#060606] text-[#ededed] overflow-x-hidden;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  /* Structural override for custom background selection states in v4 */
+  ::selection {
+    background-color: #00cc66;
+    color: #000000;
+  }
+}
+
+@layer utilities {
+
+  /* High-Contrast Structural Grid Lines */
+  .grid-layout-lines {
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(to right, #141414 1px, transparent 1px),
+      linear-gradient(to bottom, #141414 1px, transparent 1px);
+  }
+
+  /* Text Stroking for Oversized Elements */
+  .stroke-text {
+    -webkit-text-stroke: 1.5px #ededed;
+    color: transparent;
+  }
+
+  .stroke-text:hover {
+    color: #ededed;
+    transition: all 0.4s ease-in-out;
+  }
+
+  /* Custom Code Scrollbars */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #0a0a0a;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #222;
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #00cc66;
+  }
+}
