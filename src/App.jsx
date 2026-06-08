@@ -23,7 +23,8 @@ export default function App() {
 
       {/* Dynamic Header / Navigation Component */}
       <nav className="sticky top-0 z-50 bg-[#0a0a0c]/80 backdrop-blur-md border-b border-[#181820] px-6 py-4">
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
+        {/* Expanded navigation constraints to max-w-7xl to match the page body scaling */}
+        <div className="max-w-7xl mx-auto md:px-6 flex justify-between items-center">
           <a href="#" className="font-mono text-sm font-bold tracking-tight text-white flex items-center gap-2 group">
             <span className="w-2 h-2 bg-[#00cc66] rounded-full group-hover:scale-125 transition-transform"></span>
             <span>{DATA.developer_profile.first_name.toLowerCase()}<span className="text-[#00cc66]">.dev()</span></span>
@@ -40,7 +41,8 @@ export default function App() {
       </nav>
 
       {/* Structured Core Layout Canvas */}
-      <div className="max-w-5xl mx-auto px-6 py-12 space-y-32">
+      {/* 👇 Expanded from max-w-5xl to max-w-7xl and adjusted padding to secure a premium wide layout at 100% zoom */}
+      <div className="max-w-7xl mx-auto px-6 md:px-12 py-12 space-y-32">
         {/* Section 1: Hero & About Matrix */}
         <About profile={DATA.developer_profile} />
 
@@ -53,7 +55,7 @@ export default function App() {
 
       {/* Global Sandbox Environment Footer */}
       <footer className="border-t border-[#181820] mt-24 py-8 text-center font-mono text-xs text-[#3a3a4c]">
-        © {new Date().getFullYear()}• ABDULAZIZ KEDIR •
+        © {new Date().getFullYear()} • ABDULAZIZ KEDIR •
       </footer>
     </div>
   );
