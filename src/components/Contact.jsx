@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
-import { toast } from 'react-hot-toast'; // <-- Import toast utility
+import { toast } from 'react-hot-toast';
 
 export default function Contact({ contact }) {
     const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -10,27 +10,32 @@ export default function Contact({ contact }) {
         e.preventDefault();
         setLoading(true);
 
-        // Optional: Trigger an ongoing loading toast notification state 
+        // Trigger an ongoing loading toast notification state 
         const transmissionToast = toast.loading('Transmitting message packet...', {
             style: {
                 background: '#111116',
                 color: '#ededed',
-                border: '1px border #1e1e28',
+                border: '1px solid #1e1e28',
                 fontFamily: 'monospace',
                 fontSize: '12px'
             }
         });
 
+        // 🔒 Safely read credentials from masked variables at runtime
+        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
         emailjs.send(
-            'service_g3ifouc',
-            'template_qgl4iu2',
+            serviceId,
+            templateId,
             {
                 from_name: form.name,
                 reply_to: form.email,
                 message: form.message,
                 to_email: contact.email,
             },
-            'TxxTZWEWyr3rh9Rae'
+            publicKey
         )
             .then(() => {
                 setLoading(false);
@@ -53,8 +58,9 @@ export default function Contact({ contact }) {
                     },
                 });
             })
-            .catch(() => {
+            .catch((error) => {
                 setLoading(false);
+                console.error("EmailJS Transmission Error:", error);
 
                 // Dismiss loading state and fire explicit connection error alert
                 toast.error('Transmission failure. Check terminal network.', {
