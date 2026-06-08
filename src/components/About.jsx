@@ -48,16 +48,17 @@ export default function About({ profile }) {
                         <div className="text-right text-[#444554] mb-4 select-none">SYSTEM_MONITOR.js</div>
                         <pre className="text-[#b5e2b5] leading-relaxed overflow-x-auto custom-scrollbar pt-2">
                             <code>
-                                {`const app = express();
-app.use(cors());
-app.use(express.json());
+                                {`const developer = {
+  name: 'Abdulaziz Kedir',
+  role: 'Full Stack Developer',
+  stack: ['React', 'Laravel', 'Node.js'],
+  mission: 'Transforming ideas into  digital experiences',
+  experience: 'Building modern web applications',
+  mindset: 'Continuous Learning & Innovation',
+  status: 'Available for Freelance and Full-Time Roles'
+};
 
-app.get('/api/status', (req, res) => {
-  res.json({ 
-    status: 'online', 
-    stack: 'MERN + Laravel' 
-  });
-});`}
+export default developer;`}
                             </code>
                         </pre>
                     </motion.div>
