@@ -52,10 +52,9 @@ export default function About({ profile }) {
   name: 'Abdulaziz Kedir',
   role: 'Full Stack Developer',
   stack: ['React', 'Laravel', 'Node.js'],
-  mission: 'Transforming ideas into  digital experiences',
-  experience: 'Building modern web applications',
-  mindset: 'Continuous Learning & Innovation',
-  status: 'Available for Freelance and Full-Time Roles'
+  mission: 'Turning ideas into products',
+  focus: 'Clean, scalable solutions',
+  status: 'Ready to build'
 };
 
 export default developer;`}
