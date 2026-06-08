@@ -1,4 +1,5 @@
 import React from 'react';
+import { Toaster } from 'react-hot-toast';
 import { DATA } from './data';
 import About from './components/About';
 import Projects from './components/Projects';
@@ -8,7 +9,19 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#0a0a0c] text-[#f4f4f6] selection:bg-[#00cc66] selection:text-black antialiased font-sans">
 
-      {/* Dynamic Header Component */}
+      {/* Global Toast Notification Container Injector */}
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+        toastOptions={{
+          style: {
+            borderRadius: '6px',
+            boxShadow: '0 10px 30px -10px rgba(0,0,0,0.7)',
+          }
+        }}
+      />
+
+      {/* Dynamic Header / Navigation Component */}
       <nav className="sticky top-0 z-50 bg-[#0a0a0c]/80 backdrop-blur-md border-b border-[#181820] px-6 py-4">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <a href="#" className="font-mono text-sm font-bold tracking-tight text-white flex items-center gap-2 group">
@@ -20,7 +33,7 @@ export default function App() {
             <a href="#projects" className="hover:text-white transition-colors">_projects</a>
             <a href="#skills" className="hover:text-white transition-colors">_skills</a>
             <a href="#connect" className="bg-[#12121a] border border-[#222330] px-4 py-1.5 text-[#00cc66] hover:bg-[#00cc66] hover:text-black font-bold transition-all rounded-sm">
-              _hire_me
+              Hire_me
             </a>
           </div>
         </div>
@@ -28,14 +41,19 @@ export default function App() {
 
       {/* Structured Core Layout Canvas */}
       <div className="max-w-5xl mx-auto px-6 py-12 space-y-32">
+        {/* Section 1: Hero & About Matrix */}
         <About profile={DATA.developer_profile} />
+
+        {/* Section 2: Projects Showcase & Tech Skills Matrix */}
         <Projects projects={DATA.featured_projects} skills={DATA.skills} />
+
+        {/* Section 3: Split Contact Icons & Form Gateway */}
         <Contact contact={DATA.developer_profile.contact} />
       </div>
 
       {/* Global Sandbox Environment Footer */}
       <footer className="border-t border-[#181820] mt-24 py-8 text-center font-mono text-xs text-[#3a3a4c]">
-        © {new Date().getFullYear()} ABDULAZIZ KEDIR • CORE ENVIRONMENT ACTIVE
+        © {new Date().getFullYear()}• ABDULAZIZ KEDIR •
       </footer>
     </div>
   );

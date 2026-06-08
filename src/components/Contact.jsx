@@ -1,35 +1,77 @@
 import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
+import { toast } from 'react-hot-toast'; // <-- Import toast utility
 
 export default function Contact({ contact }) {
     const [form, setForm] = useState({ name: '', email: '', message: '' });
     const [loading, setLoading] = useState(false);
-    const [status, setStatus] = useState({ type: '', msg: '' });
 
     const handleSend = (e) => {
         e.preventDefault();
         setLoading(true);
-        setStatus({ type: '', msg: '' });
+
+        // Optional: Trigger an ongoing loading toast notification state 
+        const transmissionToast = toast.loading('Transmitting message packet...', {
+            style: {
+                background: '#111116',
+                color: '#ededed',
+                border: '1px border #1e1e28',
+                fontFamily: 'monospace',
+                fontSize: '12px'
+            }
+        });
 
         emailjs.send(
-            'YOUR_SERVICE_ID',
-            'YOUR_TEMPLATE_ID',
+            'service_g3ifouc',
+            'template_qgl4iu2',
             {
                 from_name: form.name,
                 reply_to: form.email,
                 message: form.message,
                 to_email: contact.email,
             },
-            'YOUR_PUBLIC_KEY'
+            'TxxTZWEWyr3rh9Rae'
         )
             .then(() => {
                 setLoading(false);
-                setStatus({ type: 'success', msg: 'Handshake accepted. Message transmitted directly!' });
                 setForm({ name: '', email: '', message: '' });
+
+                // Dismiss loading state and fire explicit success alert
+                toast.success('Message sent successfully!', {
+                    id: transmissionToast,
+                    duration: 4000,
+                    style: {
+                        background: '#0a1c11',
+                        color: '#00cc66',
+                        border: '1px solid #1B4332',
+                        fontFamily: 'monospace',
+                        fontSize: '12px'
+                    },
+                    iconTheme: {
+                        primary: '#00cc66',
+                        secondary: '#0a1c11',
+                    },
+                });
             })
             .catch(() => {
                 setLoading(false);
-                setStatus({ type: 'error', msg: 'Connection timeout. Check your configuration parameters.' });
+
+                // Dismiss loading state and fire explicit connection error alert
+                toast.error('Transmission failure. Check terminal network.', {
+                    id: transmissionToast,
+                    duration: 5000,
+                    style: {
+                        background: '#1c0a0a',
+                        color: '#f87171',
+                        border: '1px solid #7f1d1d',
+                        fontFamily: 'monospace',
+                        fontSize: '12px'
+                    },
+                    iconTheme: {
+                        primary: '#f87171',
+                        secondary: '#1c0a0a',
+                    },
+                });
             });
     };
 
@@ -42,7 +84,7 @@ export default function Contact({ contact }) {
                 {/* LEFT COMPONENT: CONTACT CHANNELS */}
                 <div className="md:col-span-5 space-y-6">
                     <div className="space-y-2">
-                        <h2 className="text-2xl font-black tracking-tight text-[#00cc66] uppercase font-mono">_establish_contact</h2>
+                        <h2 className="text-2xl font-black tracking-tight text-[#00cc66] uppercase font-mono">Contact Me</h2>
                         <p className="text-xs text-[#88899a] leading-relaxed">
                             I am open to remote engineering roles, standalone contract builds, and full-stack integrations. Tap any pipeline to connect directly.
                         </p>
@@ -92,20 +134,13 @@ export default function Contact({ contact }) {
                             className="bg-[#0a0a0c] border border-[#1e1e28] rounded-md p-3 text-sm text-white font-mono focus:border-[#00cc66] focus:outline-none transition-colors resize-none w-full"
                         ></textarea>
 
-                        <div className="flex flex-col sm:flex-row items-center gap-4 pt-1 justify-between">
+                        <div className="flex pt-1 justify-start">
                             <button
                                 type="submit" disabled={loading}
                                 className="bg-[#00cc66] text-black font-mono text-xs font-bold uppercase tracking-widest px-8 py-3.5 rounded-md hover:bg-white transition-all duration-300 w-full sm:w-auto disabled:opacity-50 cursor-pointer"
                             >
-                                {loading ? 'Transmitting...' : 'Send Message Packet'}
+                                {loading ? 'Transmitting...' : 'Send Message'}
                             </button>
-
-                            {status.msg && (
-                                <div className={`font-mono text-xs px-4 py-2 border rounded ${status.type === 'success' ? 'bg-[#0a1c11] border-green-900 text-[#00cc66]' : 'bg-[#1c0a0a] border-red-900 text-red-400'
-                                    }`}>
-                                    {status.msg}
-                                </div>
-                            )}
                         </div>
                     </form>
                 </div>
