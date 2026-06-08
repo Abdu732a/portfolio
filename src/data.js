@@ -6,7 +6,7 @@ export const DATA = {
         "sub_title": "MERN & Laravel Specialist",
         "bio": "I'm a passionate Full-Stack Developer specializing in Laravel and React, dedicated to building modern, responsive, and user-centered web applications. I enjoy turning complex ideas into clean, efficient, and scalable digital solutions that create real value for users.\n\nWith a strong foundation in web development and a continuous drive to learn, I am always exploring new technologies and best practices to improve my craft. My experience includes developing complete web applications from concept to deployment, focusing on performance, usability, and maintainable code.\n\nBeyond technical skills, I am known for being disciplined, detail-oriented, and committed to delivering high-quality results. I approach every project with curiosity, creativity, and a problem-solving mindset. Whether working independently or as part of a team, I strive to build meaningful products that make a lasting impact.\n\nMy goal is to grow into a world-class software engineer while helping businesses and individuals bring their ideas to life through technology.",
         "metrics": [
-            { "value": "BSc", "label": "Computer Science Degree" },
+            { "value": "BSc", "label": "Computer Science Degree(2022-2026)" },
             { "value": "MERN", "label": "Stack Mastery" },
             { "value": "3+", "label": "Production-Ready Applications" }
         ],
