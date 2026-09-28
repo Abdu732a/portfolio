@@ -8,7 +8,7 @@ export const DATA = {
         "metrics": [
             { "value": "BSc", "label": "Computer Science Degree(2022-2026) -St.Mary Univesity" },
             { "value": "Full Stack", "label": "Stack Mastery" },
-            { "value": "3+", "label": "Production-Ready Applications" }
+            { "value": "5+", "label": "Production-Ready Applications" }
         ],
         "contact": {
             "email": "abdu732a@gmail.com",
@@ -25,25 +25,29 @@ export const DATA = {
     },
     "featured_projects": [
         {
-            "id": "bright-tutorial-system",
-            "title": "Bright Tutorial Management App",
-            "stack_type": "Laravel + React Hybrid",
-            summary: "A comprehensive enterprise-grade tutorial management platform built to fully automate administrative flows, handle premium registration gates.",
-            features: [
-                "Multi-role RBAC security matrix ",
-                "Integrated transaction ledger routing via Chapa ",
-                "Real-time messaging  and managed live session "
-            ], "live_link": "https://bright-tutorial.example.com",
-            "github_link": "https://github.com/Abdu732a/bright_tutor"
-        },
-        {
-            "id": "bet-property-booking",
-            "title": "Bet Property Booking App",
+            "id": "hudhud-printing-platform",
+            "title": "Hudhud Printer House  App",
             "stack_type": "MERN Stack",
-            "summary": "A high-performance property booking engine featuring dual-portal interactive flows for guests and hosts, conflict-free scheduling logic, and multi-parameter filtering arrays.",
-            "features": ["Real-time calendar reservation checks", "Verified hosts and properties", "Location & budget dataset search"],
-            "live_link": "https://bet-booking.example.com",
-            "github_link": "https://github.com/Yoseph-M/Nuvlo"
+            "summary": "An automated web order management and customer service platform built for a commercial printing business, featuring real-time order tracking,  and an intelligent customer support chatbot.",
+            "features": [
+                "Interactive order placement & real-time status tracking",
+                "Automated customer service AI chatbot for print inquiries",
+                "Administrative dashboard for service & order management"
+            ], "live_link": "https://hudhud-printing.netlify.app/",
+            "github_link": "https://github.com/Abdu732a/hudhud"
+        },
+
+        {
+            "id": "attendance-management-system",
+            "title": "School Attendance Management App",
+            "stack_type": "MERN Stack",
+            "summary": "A role-based school management platform featuring multi-language support (English & Amharic), class member assignment logic, and auto-generated student credentials.",
+            "features": [
+                "Role-based dashboards for Admins, Ustazs, and Students",
+                "Bilingual interface supporting English and Amharic",
+                "Class and member assignment with conflict-free tracking"],
+            "live_link": "https://teqwamesjidmedresa.vercel.app/admin/dashboard",
+            "github_link": "https://github.com/Abdu732a/attendance"
         },
         {
             "id": "quran-mp3-streamer",

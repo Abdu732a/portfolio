@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// 📷 Local Image Asset Mapper Object
+// 📷 Local Image Asset Mapper
 const projectImages = {
-    "nuvlo": ["/images/nulvo1.png", "/images/nulvo2.png", "/images/nulvo3.png"],
-    "bright": ["/images/bright1.png", "/images/bright2.png"],
+    "bright": ["/images/hudhud3.png", "/images/hudhud4.png", "/images/hudhud1.png", "/images/hudhud2.png"],
+    "nuvlo": ["/images/attendance.png", "/images/attendance2.png", "/images/attendance3.png", "/images/attendance4.png"],
     "quran": ["/images/quran1.jpg", "/images/quran2.jpg", "/images/quran3.jpg"]
 };
 
-// 🗺️ Lightbox Modal Component for Fullscreen Viewing
 function Lightbox({ screenshots, initialIndex, onClose }) {
     const [currentIndex, setCurrentIndex] = useState(initialIndex);
     const [isHovered, setIsHovered] = useState(false);
 
-    // Dynamic Hover slideshow inside the Lightbox modal view
     useEffect(() => {
         if (!isHovered) return;
         const interval = setInterval(() => {
@@ -41,7 +39,6 @@ function Lightbox({ screenshots, initialIndex, onClose }) {
             className="fixed inset-0 bg-black/95 backdrop-blur-md z-50 flex flex-col items-center justify-center p-4 select-none"
             onClick={onClose}
         >
-            {/* Close Button */}
             <button
                 onClick={onClose}
                 className="absolute top-6 right-6 text-white/70 hover:text-[#00cc66] text-3xl font-mono transition-colors p-2 z-50"
@@ -50,9 +47,7 @@ function Lightbox({ screenshots, initialIndex, onClose }) {
                 ✕
             </button>
 
-            {/* Main Interactive Slide Arena */}
             <div className="relative max-w-4xl w-full aspect-video flex items-center justify-center">
-                {/* Left navigation arrow */}
                 <button
                     onClick={handlePrev}
                     className="absolute left-2 md:-left-16 bg-[#111116]/80 border border-[#1e1e28] hover:border-[#00cc66] text-white p-3 rounded-full transition-all text-xl z-50 font-mono"
@@ -60,7 +55,6 @@ function Lightbox({ screenshots, initialIndex, onClose }) {
                     &lt;
                 </button>
 
-                {/* Lightbox Focus Image Container */}
                 <div
                     className="w-full h-full overflow-hidden rounded-xl border border-[#222234] bg-[#0e0e12]"
                     onMouseEnter={() => setIsHovered(true)}
@@ -73,7 +67,6 @@ function Lightbox({ screenshots, initialIndex, onClose }) {
                     />
                 </div>
 
-                {/* Right navigation arrow */}
                 <button
                     onClick={handleNext}
                     className="absolute right-2 md:-right-16 bg-[#111116]/80 border border-[#1e1e28] hover:border-[#00cc66] text-white p-3 rounded-full transition-all text-xl z-50 font-mono"
@@ -82,7 +75,6 @@ function Lightbox({ screenshots, initialIndex, onClose }) {
                 </button>
             </div>
 
-            {/* Bottom Counter Indicator */}
             <div className="mt-4 font-mono text-xs text-[#5c5c6d]">
                 {currentIndex + 1} / {screenshots.length}
             </div>
@@ -90,19 +82,16 @@ function Lightbox({ screenshots, initialIndex, onClose }) {
     );
 }
 
-// Sub-component to manage screens, hovers, and bounds per individual project item
 function ProjectCard({ project, index }) {
-    const titleKey = project.title.toLowerCase();
-    let screenshots = projectImages.nuvlo;
-
-    if (titleKey.includes('bright')) screenshots = projectImages.bright;
-    if (titleKey.includes('quran') || titleKey.includes('hilal')) screenshots = projectImages.quran;
+    // 🎯 Positional assignment: 1st card -> Bright, 2nd card -> Nuvlo, 3rd card -> Quran
+    let screenshots = projectImages.bright;
+    if (index === 1) screenshots = projectImages.nuvlo;
+    if (index === 2) screenshots = projectImages.quran;
 
     const [currentImgIndex, setCurrentImgIndex] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
-    // Runs a slow, smooth cyclical interval exclusively while the element is hovered
     useEffect(() => {
         if (!isHovered) return;
         const interval = setInterval(() => {
@@ -121,32 +110,36 @@ function ProjectCard({ project, index }) {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
-                className="bg-[#111116] border border-[#1e1e28] hover:border-[#00cc66] rounded-xl p-4 lg:p-5 flex flex-col justify-between transition-all duration-300 group shadow-lg max-h-[85vh] sm:max-h-none overflow-y-auto sm:overflow-visible lg:max-h-[520px]"
+                className="bg-[#0f0f14] border border-[#1e1e2d] hover:border-[#00cc66]/50 rounded-2xl p-5 flex flex-col justify-between transition-all duration-300 group shadow-xl hover:shadow-[#00cc66]/5 relative overflow-hidden"
             >
-                <div className="space-y-3">
+                {/* Subtle Glow Accent Header */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#00cc66]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                <div className="space-y-4">
+                    {/* Header Details */}
                     <div className="flex justify-between items-center">
-                        <span className="text-[10px] font-mono bg-[#181824] border border-[#222234] text-[#00cc66] px-2.5 py-1 rounded-md">
+                        <span className="text-[10px] font-mono tracking-wider font-semibold bg-[#161622] text-[#00cc66] border border-[#00cc66]/20 px-3 py-1 rounded-full uppercase">
                             {project.stack_type}
                         </span>
-                        <span className="font-mono text-xs text-[#3a3a4c]">0{index + 1}.sh</span>
+                        <span className="font-mono text-xs text-[#4a4a60] font-semibold">0{index + 1}.sh</span>
                     </div>
 
-                    {/* 🖥️ Interactive Screenshot Showcase Section */}
+                    {/* Screenshot Showcase Container */}
                     <div
                         onClick={() => setIsLightboxOpen(true)}
-                        className="relative mt-1 overflow-hidden rounded-lg bg-[#0e0e12] border border-[#181822] group-hover:border-[#222330] transition-colors aspect-video cursor-zoom-in"
+                        className="relative mt-2 overflow-hidden rounded-xl bg-[#09090d] border border-[#1a1a26] group-hover:border-[#2a2a3e] transition-colors aspect-video cursor-zoom-in group/img"
                     >
                         <img
                             src={screenshots[currentImgIndex]}
                             alt={`${project.title} screenshot ${currentImgIndex + 1}`}
-                            className="w-full h-full object-cover object-top opacity-85 group-hover:opacity-100 transition-opacity duration-300"
+                            className="w-full h-full object-cover object-top opacity-90 group-hover/img:scale-105 transition-all duration-500"
                             onError={(e) => {
                                 e.target.src = `https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop`;
                             }}
                         />
 
-                        {/* Tiny Dots UI */}
-                        <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex gap-1.5 z-10 bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                        {/* Dot Navigation */}
+                        <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex gap-1.5 z-10 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
                             {screenshots.map((_, dotIdx) => (
                                 <button
                                     key={dotIdx}
@@ -157,7 +150,7 @@ function ProjectCard({ project, index }) {
                                     }}
                                     className={`w-2 h-2 rounded-full transition-all duration-300 ${currentImgIndex === dotIdx
                                         ? 'bg-[#00cc66] scale-125'
-                                        : 'bg-[#5c5c6d] hover:bg-white'
+                                        : 'bg-white/30 hover:bg-white'
                                         }`}
                                     aria-label={`Go to screenshot ${dotIdx + 1}`}
                                 />
@@ -165,31 +158,48 @@ function ProjectCard({ project, index }) {
                         </div>
                     </div>
 
-                    <h3 className="text-lg font-bold text-white group-hover:text-[#00cc66] transition-colors pt-1">
+                    {/* Project Title */}
+                    <h3 className="text-xl font-bold text-white group-hover:text-[#00cc66] transition-colors">
                         {project.title}
                     </h3>
 
-                    {/* ⚡ Handled line clamping for clean, identical card proportions on desktop layouts */}
-                    <p className="text-xs sm:text-sm text-[#88899a] leading-relaxed line-clamp-3 lg:line-clamp-4">
+                    {/* Summary */}
+                    <p className="text-xs sm:text-sm text-[#8f90a2] leading-relaxed line-clamp-3">
                         {project.summary}
                     </p>
 
-                    <ul className="space-y-1 pt-1 grid grid-cols-1 gap-x-2">
+                    {/* Feature List */}
+                    <ul className="space-y-1.5 pt-1">
                         {project.features.slice(0, 3).map((feature, idx) => (
-                            <li key={idx} className="text-[11px] font-mono text-[#5c5c6d] flex items-start gap-2 truncate">
-                                <span className="text-[#00cc66] flex-shrink-0">•</span> {feature}
+                            <li key={idx} className="text-[11px] font-mono text-[#6c6d83] flex items-center gap-2 truncate">
+                                <span className="w-1.5 h-1.5 bg-[#00cc66] rounded-full flex-shrink-0" />
+                                <span className="truncate">{feature}</span>
                             </li>
                         ))}
                     </ul>
                 </div>
 
-                <div className="flex gap-4 border-t border-[#181820] pt-3 mt-4 font-mono text-xs">
-                    <a href={project.live_link} target="_blank" rel="noreferrer" className="text-white hover:text-[#00cc66] transition-colors">[View App]</a>
-                    <a href={project.github_link} target="_blank" rel="noreferrer" className="text-[#5c5c6d] hover:text-white transition-colors">[Source Code]</a>
+                {/* Footer Action Links */}
+                <div className="flex items-center gap-3 border-t border-[#1a1a26] pt-4 mt-5 font-mono text-xs">
+                    <a
+                        href={project.live_link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex-1 text-center py-2 rounded-lg bg-[#161622] hover:bg-[#00cc66] text-white hover:text-black font-semibold transition-all border border-[#222234] hover:border-[#00cc66]"
+                    >
+                        Live App ↗
+                    </a>
+                    <a
+                        href={project.github_link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex-1 text-center py-2 rounded-lg bg-transparent hover:bg-[#161622] text-[#7a7b93] hover:text-white transition-all border border-[#1a1a26] hover:border-[#2e2e42]"
+                    >
+                        Code ↗
+                    </a>
                 </div>
             </motion.div>
 
-            {/* Handles mounting and unmounting animations safely */}
             <AnimatePresence>
                 {isLightboxOpen && (
                     <Lightbox
@@ -206,30 +216,31 @@ function ProjectCard({ project, index }) {
 export default function Projects({ projects, skills }) {
     return (
         <div className="space-y-20 md:space-y-32 max-w-7xl mx-auto px-4">
-            {/* Projects Gallery */}
             <section id="projects" className="space-y-6 sm:space-y-8">
                 <div className="border-b border-[#181820] pb-4">
-                    <h2 className="text-xs uppercase font-mono tracking-widest text-[#5c5c6d]">// 02 / selected_production_software</h2>
+                    <h2 className="text-xs uppercase font-mono tracking-widest text-[#5c5c6d]">
+                        Projects
+                    </h2>
                 </div>
 
-                {/* ⚡ Modified to grid-cols-1 on phone, md:grid-cols-2 on tablet, and lg:grid-cols-3 on PC desktop */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 items-stretch">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
                     {projects.map((project, i) => (
                         <ProjectCard key={project.id || i} project={project} index={i} />
                     ))}
                 </div>
             </section>
 
-            {/* Technical Skill Matrix */}
             <section id="skills" className="space-y-8">
                 <div className="border-b border-[#181820] pb-4">
-                    <h2 className="text-xs uppercase font-mono tracking-widest text-[#5c5c6d]">// 03 / core_technical_capabilities</h2>
+                    <h2 className="text-xs uppercase font-mono tracking-widest text-[#5c5c6d]">
+                        Skills
+                    </h2>
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {Object.entries(skills).map(([category, skillList]) => (
-                        <div key={category} className="bg-[#111116]/40 border border-[#181820] rounded-lg p-4 sm:p-5 space-y-3 sm:space-y-4">
-                            <h3 className="font-mono text-[11px] sm:text-xs text-[#5c5c6d] uppercase tracking-wider">// {category}</h3>
+                        <div key={category} className="bg-[#0f0f14] border border-[#1e1e2d] rounded-xl p-5 space-y-3">
+                            <h3 className="font-mono text-[11px] text-[#5c5c6d] uppercase tracking-wider">// {category}</h3>
                             <ul className="space-y-2 font-mono text-xs sm:text-sm">
                                 {skillList.map((skill, idx) => (
                                     <li key={idx} className="text-white flex items-center gap-2 truncate">
